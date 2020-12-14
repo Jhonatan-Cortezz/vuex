@@ -8,6 +8,8 @@
     <h1 :style="colorContador">
       {{titulo}} {{ contador }}
     </h1>
+
+    <button @click="incrementar">Aumentar</button>
   </div>
 </template>
 
@@ -15,7 +17,7 @@
 // @ is an alias to /src
 // importo el modulo de vuex para mapear los state
 // si fuera a mapear mutation deberia usar eso
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'Home',
@@ -31,6 +33,10 @@ export default {
     colorContador(){
       return [this.contador > 20 ? {'color': 'blue'} : {'color': 'red'}]
     }
+  },
+  // por regla las mutaciones se mapean en los methods
+  methods: {
+    ...mapMutations(['incrementar'])
   }
 }
 </script>
