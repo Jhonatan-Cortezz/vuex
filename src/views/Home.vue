@@ -9,7 +9,9 @@
       {{titulo}} {{ contador }}
     </h1>
 
-    <button @click="accionIncrementar">Aumentar</button>
+    <button @click="accionIncrementar">Aumentar</button> | 
+
+    <BtnDisminuir />
   </div>
 </template>
 
@@ -17,11 +19,13 @@
 // @ is an alias to /src
 // importo el modulo de vuex para mapear los state
 // si fuera a mapear mutation deberia usar eso
+import BtnDisminuir from '../components/BtnDisminuir'
 import {mapState, mapMutations, mapActions} from 'vuex'
 
 export default {
   name: 'Home',
   components: {
+    BtnDisminuir
   },
   data() {
     return {
