@@ -4,6 +4,9 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    // creando primer accion
+    // esto lo puedo pintar el cualquier vista
+    contador: 100
   },
   mutations: {
   },

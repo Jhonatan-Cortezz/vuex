@@ -1,18 +1,18 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- forma de acceder a los datos de store/index.js -->
+    <!-- esta es una vista donde puedo pintar la data -->
+    <h1>Mi contador: {{ $store.state.contador}}</h1>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
   }
 }
 </script>
