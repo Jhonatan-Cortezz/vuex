@@ -12,6 +12,10 @@
     <button @click="accionIncrementar">Aumentar</button> | 
 
     <BtnDisminuir />
+
+    <br><br>
+    <BotonAccion :estado="true"/> | 
+    <BotonAccion :estado="false"/>
   </div>
 </template>
 
@@ -20,12 +24,14 @@
 // importo el modulo de vuex para mapear los state
 // si fuera a mapear mutation deberia usar eso
 import BtnDisminuir from '../components/BtnDisminuir'
+import BotonAccion from '../components/BotonAccion'
 import {mapState, mapMutations, mapActions} from 'vuex'
 
 export default {
   name: 'Home',
   components: {
-    BtnDisminuir
+    BtnDisminuir,
+    BotonAccion
   },
   data() {
     return {
