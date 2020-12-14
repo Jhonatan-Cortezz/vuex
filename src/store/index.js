@@ -14,6 +14,10 @@ export default createStore({
     }
   },
   actions: {
+    // forma correcta de ejecutar la mutacion
+    accionIncrementar({commit}){
+      commit('incrementar')
+    }
   },
   modules: {
   }

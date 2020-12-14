@@ -9,7 +9,7 @@
       {{titulo}} {{ contador }}
     </h1>
 
-    <button @click="incrementar">Aumentar</button>
+    <button @click="accionIncrementar">Aumentar</button>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
 // @ is an alias to /src
 // importo el modulo de vuex para mapear los state
 // si fuera a mapear mutation deberia usar eso
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapActions} from 'vuex'
 
 export default {
   name: 'Home',
@@ -36,7 +36,10 @@ export default {
   },
   // por regla las mutaciones se mapean en los methods
   methods: {
-    ...mapMutations(['incrementar'])
+    // ...mapMutations(['incrementar']),
+    // aqui mapeo tambien las actions
+    ...mapActions(['accionIncrementar'])
+
   }
 }
 </script>
