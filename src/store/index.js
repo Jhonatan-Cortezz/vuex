@@ -12,8 +12,8 @@ export default createStore({
     incrementar(state){
       state.contador = state.contador + 5
     },
-    disminuir(state){
-      state.contador = state.contador - 5
+    disminuir(state, payload){
+      state.contador = state.contador - payload
     }
   },
   actions: {
@@ -22,8 +22,8 @@ export default createStore({
       commit('incrementar')
     },
 
-    accionDisminuir({commit}){
-      commit('disminuir')
+    accionDisminuir({commit}, numero){
+      commit('disminuir', numero)
     }
   },
   modules: {
