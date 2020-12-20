@@ -28,6 +28,13 @@
         <label for="rd-2" class="form-check-label">Relax</label>
       </div>
     </div>
+
+    <!-- Para los input tipo numbre -->
+    <div class="mt-2">
+      <div class="">
+        <input type="number" id="" v-model.number="tarea.numero"><!-- here a diferent -->
+      </div>
+    </div>
   </form>
   <hr>
   <p>{{tarea}}</p>
@@ -40,7 +47,8 @@ export default {
       tarea: {
         nombre: '',
         categorias: [],
-        estado: ''
+        estado: '',
+        numero: 0
       }
     }
   },
