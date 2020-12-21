@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <button class="btn btn-dark mt-2 btn-block" type="submit">
+    <button class="btn btn-dark mt-2 btn-block" type="submit" :disabled="bloquear">
       Procesar
     </button>
   </form>
@@ -60,6 +60,16 @@ export default {
   methods: {
     procesarFormulario() {
       console.log(this.tarea)
+      if (this.tarea.nombre.trim() === "") {
+        console.log("Campo vacio")
+        return
+      }
+    }
+  },
+
+  computed: {
+    bloquear() {
+      return this.tarea.nombre.trim() === "" ? true : false
     }
   },
 }
