@@ -1,22 +1,26 @@
 <template>
   <form @submit.prevent="procesarFormulario">
     <Input :tarea="tarea"/>
+    <hr>
+    <ListaTareas />
   </form>
   <hr>
-  <p>{{tarea}}</p>
+  
 </template>
 
 <script>
 
 import Input from '../components/Input'
 import {mapActions} from 'vuex'
+import ListaTareas from '../components/ListaTareas'
 
 // importacion para generar los id
 const shortid = require('shortid')
 
 export default {
   components: {
-    Input
+    Input,
+    ListaTareas
   },
 
   data() {
