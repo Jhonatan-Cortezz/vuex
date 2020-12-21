@@ -64,6 +64,16 @@ export default {
         console.log("Campo vacio")
         return
       }
+
+      // despues de procesar los datos
+
+      // limpio los campos
+      this.tarea = {
+        nombre: '',
+        categorias: [],
+        estado: '',
+        numero: 0
+      }
     }
   },
 
