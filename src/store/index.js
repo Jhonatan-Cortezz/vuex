@@ -6,7 +6,17 @@ export default createStore({
   state: {
     // creando primer accion
     // esto lo puedo pintar el cualquier vista
-    contador: 30
+    contador: 30,
+
+    tareas: [],
+    tarea: {
+      id: '',
+      nombre: '',
+      categorias: [],
+      estado: '',
+      numero: 0
+    }
+
   },
   mutations: {
     incrementar(state, payload){
@@ -14,6 +24,13 @@ export default createStore({
     },
     disminuir(state, payload){
       state.contador = state.contador - payload
+    },
+
+    // CRUD Mutattions
+    // mutacion para modifical el estado de la tarea
+    SET(state, payload){
+      state.tareas.push(payload)
+      console.log(state.tareas)
     }
   },
   actions: {
@@ -32,6 +49,11 @@ export default createStore({
       } else {
         commit('disminuir', objeto.numero)
       }
+    },
+
+    // aciones para el crud
+    setTarea({commit}, tarea) {
+      commit('SET', tarea)
     }
   },
   modules: {
