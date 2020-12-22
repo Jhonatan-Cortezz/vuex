@@ -1,5 +1,6 @@
 // esto es vuex a esto se le llama tienda
 
+// import { for } from 'core-js/fn/symbol'
 import { createStore } from 'vuex'
 
 // importo el route para enviar de los datos de la vista update al formulario
@@ -62,8 +63,18 @@ export default createStore({
       router.push('/formulario')
 
       localStorage.setItem('tareas', JSON.stringify(state.tareas))
+    },
+
+    // Mutaciones para api rest
+    LOAD(state, payload){
+      state.tareas = payload
     }
+
+
+    // fin mutaciones api rest
   },
+
+
   actions: {
     // cargar localStorage
     saveLocalStorage({commit}){
@@ -127,6 +138,23 @@ export default createStore({
         // aca recibo la respuesta del server
         const dataDB = await res.json()
         console.log(dataDB)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    async readDataBase({commit}){
+      try {
+        const res =  await fetch('https://vue-api-77f7a-default-rtdb.firebaseio.com/tareas.json')
+        const dataDB = await res.json()
+
+        const arrayTareas = []
+
+        for(let id in dataDB){
+          arrayTareas.push(dataDB[id])
+        }
+
+        commit('LOAD', arrayTareas)
       } catch (error) {
         console.log(error)
       }

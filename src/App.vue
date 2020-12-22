@@ -17,11 +17,13 @@ export default {
   },
   
   methods: {
-    ...mapActions(['saveLocalStorage'])
+    // ...mapActions(['saveLocalStorage'])
+    ...mapActions(['readDataBase'])
   },
 
   created(){
-    this.saveLocalStorage()
+    // this.saveLocalStorage()
+    this.readDataBase()
   }
 }
 </script>
