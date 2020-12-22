@@ -24,6 +24,11 @@ const routes = [
     path: '/update/:id',
     name: 'Update',
     component: () => import('../views/Update.vue')
+  },
+  {
+    path: '/api-rest',
+    name: 'ApiRest',
+    component: () => import('../views/ApiRest.vue')
   }
 ]
 

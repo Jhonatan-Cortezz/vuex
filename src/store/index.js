@@ -108,7 +108,35 @@ export default createStore({
 
     updateTare({commit}, tarea){
       commit('UPDATE_TAREA', tarea)
+    },
+
+    // Apartado para consumir API REST firebase
+    async setTaskApi({commit}, tarea){
+      try {
+        // aqui hago la peticion por medio de url
+        const res =  await fetch(`https://vue-api-77f7a-default-rtdb.firebaseio.com/tareas/${tarea.id}.json`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          // convierto la tarea en un objeto JSOn
+          body: JSON.stringify(tarea)
+        })
+
+        // aca recibo la respuesta del server
+        const dataDB = await res.json()
+        console.log(dataDB)
+      } catch (error) {
+        console.log(error)
+      }
     }
+
+
+
+
+    // fin apartado
+
   },
   modules: {
   }

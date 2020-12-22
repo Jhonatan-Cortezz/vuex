@@ -10,6 +10,10 @@
       Formularios
     </router-link>
 
+    <router-link to="/api-rest" class="navbar-brand">
+      API REST
+    </router-link>
+
     <div class="d-flex">
       <router-link class="btn btn-dark" to="/">
         Tareas
