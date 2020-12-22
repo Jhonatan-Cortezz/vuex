@@ -22,6 +22,11 @@ export default createStore({
 
   },
   mutations: {
+    // para guardar en localstorage
+    CARGAR_LOCALSTO(state, payload){
+      state.tareas = payload
+    },
+
     incrementar(state, payload){
       state.contador = state.contador + payload
     },
@@ -33,11 +38,12 @@ export default createStore({
     // mutacion para modifical el estado de la tarea
     SET(state, payload){
       state.tareas.push(payload)
-      console.log(state.tareas)
+      localStorage.setItem('tareas', JSON.stringify(state.tareas))
     }, 
 
     DELETE(state, payload){
       state.tareas = state.tareas.filter(item => item.id !== payload)
+      localStorage.setItem('tareas', JSON.stringify(state.tareas))
     },
 
     TAREA(state, payload){
@@ -54,9 +60,22 @@ export default createStore({
 
       // aca envio al usuario de nuevo al formulario
       router.push('/formulario')
+
+      localStorage.setItem('tareas', JSON.stringify(state.tareas))
     }
   },
   actions: {
+    // cargar localStorage
+    saveLocalStorage({commit}){
+      if (localStorage.getItem('tareas')) {
+        const tareas = JSON.parse(localStorage.getItem('tareas'))
+        commit('CARGAR_LOCALSTO', tareas)
+        return
+      }
+
+      localStorage.setItem('tareas', JSON.stringify([]))
+    },
+
     // forma correcta de ejecutar la mutacion
     accionIncrementar({commit}){
       commit('incrementar', 10)
