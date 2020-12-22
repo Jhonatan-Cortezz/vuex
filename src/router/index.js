@@ -19,6 +19,11 @@ const routes = [
     path: '/formulario',
     name: 'formulario',
     component: () => import('../views/formulario.vue')
+  },
+  {
+    path: '/update/:id',
+    name: 'Update',
+    component: () => import('../views/Update.vue')
   }
 ]
 

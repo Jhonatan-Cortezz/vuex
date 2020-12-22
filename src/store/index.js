@@ -35,6 +35,10 @@ export default createStore({
 
     DELETE(state, payload){
       state.tareas = state.tareas.filter(item => item.id !== payload)
+    },
+
+    TAREA(state, payload){
+      state.tarea = state.tareas.find(item => item.id === payload)
     }
   },
   actions: {
@@ -62,6 +66,10 @@ export default createStore({
 
     deleteTarea({commit}, id){
       commit('DELETE', id)
+    },
+
+    setTask({commit}, id){
+      commit('TAREA', id)
     }
   },
   modules: {
