@@ -2,6 +2,9 @@
 
 import { createStore } from 'vuex'
 
+// importo el route para enviar de los datos de la vista update al formulario
+import router from '../router'
+
 export default createStore({
   state: {
     // creando primer accion
@@ -38,7 +41,19 @@ export default createStore({
     },
 
     TAREA(state, payload){
+      // validacion para que el usuario no se pase de P$#%# en la url
+      if(!state.tareas.find(item => item.id === payload)){
+        router.push('/formulario')
+        return
+      }
       state.tarea = state.tareas.find(item => item.id === payload)
+    },
+
+    UPDATE_TAREA(state, payload){
+      state.tareas = state.tareas.map(item => item.id === payload.id ? payload : item)/* map es una funcion de js que permite devolver un array pero yo le digo la condicion */
+
+      // aca envio al usuario de nuevo al formulario
+      router.push('/formulario')
     }
   },
   actions: {
@@ -70,6 +85,10 @@ export default createStore({
 
     setTask({commit}, id){
       commit('TAREA', id)
+    },
+
+    updateTare({commit}, tarea){
+      commit('UPDATE_TAREA', tarea)
     }
   },
   modules: {
