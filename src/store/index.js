@@ -31,6 +31,10 @@ export default createStore({
     SET(state, payload){
       state.tareas.push(payload)
       console.log(state.tareas)
+    }, 
+
+    DELETE(state, payload){
+      state.tareas = state.tareas.filter(item => item.id !== payload)
     }
   },
   actions: {
@@ -54,6 +58,10 @@ export default createStore({
     // aciones para el crud
     setTarea({commit}, tarea) {
       commit('SET', tarea)
+    },
+
+    deleteTarea({commit}, id){
+      commit('DELETE', id)
     }
   },
   modules: {
