@@ -29,6 +29,11 @@ const routes = [
     path: '/api-rest',
     name: 'ApiRest',
     component: () => import('../views/ApiRest.vue')
+  },
+  {
+    path: '/registro',
+    name: 'Registro',
+    component: () => import('../views/Registro.vue')
   }
 ]
 
