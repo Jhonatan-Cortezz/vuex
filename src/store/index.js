@@ -75,6 +75,10 @@ export default createStore({
 
       // aca envio al usuario de nuevo al formulario
       router.push('/formulario')
+    },
+
+    DELETE_TASK(state, payload){
+      state.tareas = state.tareas.filter(item => item.id !== payload)
     }
 
 
@@ -176,14 +180,23 @@ export default createStore({
 
         const dataDB = await res.json()
         commit('UPDATE', tarea)
-        
+
       } catch (error) {
         console.log(error)
       }
 
-    }
+    },
   
-
+    async deleteTask({commit}, id){
+      try {
+          await fetch(`https://vue-api-77f7a-default-rtdb.firebaseio.com/tareas/${id}.json`,{
+          method: 'DELETE',
+        })
+        commit('DELETE_TASK', id)
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
 
 
