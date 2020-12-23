@@ -68,6 +68,13 @@ export default createStore({
     // Mutaciones para api rest
     LOAD(state, payload){
       state.tareas = payload
+    },
+
+    UPDATE(state, payload){
+      state.tareas = state.tareas.map(item => item.id === payload.id ? payload : item)/* map es una funcion de js que permite devolver un array pero yo le digo la condicion */
+
+      // aca envio al usuario de nuevo al formulario
+      router.push('/formulario')
     }
 
 
@@ -158,7 +165,24 @@ export default createStore({
       } catch (error) {
         console.log(error)
       }
+    },
+
+    async updateDataBase({commit}, tarea){
+      try {
+        const res = await fetch(`https://vue-api-77f7a-default-rtdb.firebaseio.com/tareas/${tarea.id}.json`,{
+          method: 'PATCH',
+          body: JSON.stringify(tarea)
+        })
+
+        const dataDB = await res.json()
+        commit('UPDATE', tarea)
+        
+      } catch (error) {
+        console.log(error)
+      }
+
     }
+  
 
 
 

@@ -1,6 +1,6 @@
 <template>
   <!-- Editar {{$route.params.id}} - {{tarea}} -->
-  <form @submit.prevent="updateTare(tarea)">
+  <form @submit.prevent="updateDataBase(tarea)">
     <Input :tarea="tarea"/>
   </form>
 </template>
@@ -16,7 +16,7 @@ export default {
     ...mapState(['tarea'])
   },
   methods: {
-    ...mapActions(['setTask', 'updateTare'])
+    ...mapActions(['setTask', 'updateTare', 'updateDataBase'])
   },
   created(){
     this.setTask(this.$route.params.id)
