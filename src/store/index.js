@@ -225,11 +225,35 @@ export default createStore({
         }
 
         commit('SET_USER', userDB)
+        router.push('/')
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    async ingresoUsuario({commit}, usuario){
+      try {
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_IMrPweGNwDaJAKejldvIu25HkNRe278', {
+          method: 'POST', 
+          body: JSON.stringify({
+            email: usuario.email,
+            password: usuario.password,
+            returnSecureToken: true
+          })
+        })
+
+        const userDB = await res.json()
+        console.log('USER DB', userDB)
+
+        if (userDB.error) {
+          return console.log(userDB.error)
+        }
+        commit('SET_USER', userDB)
+        router.push('/')
       } catch (error) {
         console.log(error)
       }
     }
-
 
     // fin apartado
 
