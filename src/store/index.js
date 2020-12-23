@@ -19,7 +19,10 @@ export default createStore({
       categorias: [],
       estado: '',
       numero: 0
-    }
+    },
+
+    // usuario para API AUTH
+    user: null
 
   },
   mutations: {
@@ -79,8 +82,11 @@ export default createStore({
 
     DELETE_TASK(state, payload){
       state.tareas = state.tareas.filter(item => item.id !== payload)
-    }
+    },
 
+    SET_USER(state, payload){
+      state.user = payload
+    }
 
     // fin mutaciones api rest
   },
@@ -196,8 +202,33 @@ export default createStore({
       } catch (error) {
         console.log(error)
       }
-    }
+    },
 
+    async registraUsuario({commit}, usuario){
+      try {
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_IMrPweGNwDaJAKejldvIu25HkNRe278', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: usuario.email,
+            password: usuario.password,
+            // token de seguridad
+            returnSecureToken: true
+          })
+        })
+
+        const userDB = await res.json()
+        console.log(userDB)
+
+        if (userDB.error) {
+          console.log(userDB.error)
+          return
+        }
+
+        commit('SET_USER', userDB)
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
 
     // fin apartado
