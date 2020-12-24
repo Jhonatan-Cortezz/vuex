@@ -142,7 +142,7 @@ export default createStore({
     async setTaskApi({commit}, tarea){
       try {
         // aqui hago la peticion por medio de url
-        const res =  await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/tarea${tarea.id}.json`, {
+        const res =  await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${tarea.id}.json`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -180,7 +180,7 @@ export default createStore({
 
     async updateDataBase({commit}, tarea){
       try {
-        const res = await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/${tarea.id}.json`,{
+        const res = await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${tarea.id}.json`,{
           method: 'PATCH',
           body: JSON.stringify(tarea)
         })
@@ -196,7 +196,7 @@ export default createStore({
   
     async deleteTask({commit}, id){
       try {
-          await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/${id}.json`,{
+          await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${id}.json`,{
           method: 'DELETE',
         })
         commit('DELETE_TASK', id)
