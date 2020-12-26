@@ -207,7 +207,8 @@ export default createStore({
 
     async registraUsuario({commit}, usuario){
       try {
-        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_IMrPweGNwDaJAKejldvIu25HkNRe278', {
+        // console.log(usuario)
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBrXsme1BAgxY4JqMbGRu-wbgVK-vBHypY', {
           method: 'POST',
           body: JSON.stringify({
             email: usuario.email,
@@ -226,7 +227,7 @@ export default createStore({
         }
 
         commit('SET_USER', userDB)
-        router.push('/')
+        // router.push('/')
       } catch (error) {
         console.log(error)
       }
