@@ -37,7 +37,7 @@ export default {
   
   methods: {
     // Importacion de la actions para el CRUD
-    ...mapActions(['setTaskApi']),
+    ...mapActions(['setTaskApi', 'readDataBase']),
 
     procesarFormulario() {
       console.log(this.tarea)
@@ -62,5 +62,9 @@ export default {
       }
     }
   },
+
+  created(){
+    this.readDataBase()
+  }
 }
 </script>

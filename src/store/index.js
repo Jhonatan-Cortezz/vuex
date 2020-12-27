@@ -139,10 +139,10 @@ export default createStore({
     },
 
     // Apartado para consumir API REST firebase
-    async setTaskApi({commit}, tarea){
+    async setTaskApi({commit, state}, tarea){
       try {
         // aqui hago la peticion por medio de url
-        const res =  await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${tarea.id}.json`, {
+        const res =  await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${state.user.localId}/${tarea.id}.json?auth=${state.user.idToken}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -155,14 +155,15 @@ export default createStore({
         // aca recibo la respuesta del server
         const dataDB = await res.json()
         console.log(dataDB)
+        commit('SET', tarea)
       } catch (error) {
         console.log(error)
       }
     },
 
-    async readDataBase({commit}){
+    async readDataBase({commit, state}){
       try {
-        const res =  await fetch('https://notas-b4968-default-rtdb.firebaseio.com/tareas.json')
+        const res =  await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${state.user.localId}.json?auth=${state.user.idToken}`)
         const dataDB = await res.json()
 
         // console.log(" registros " +dataDB)
@@ -178,9 +179,9 @@ export default createStore({
       }
     },
 
-    async updateDataBase({commit}, tarea){
+    async updateDataBase({commit, state}, tarea){
       try {
-        const res = await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${tarea.id}.json`,{
+        const res = await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${state.user.localId}/${tarea.id}.json?auth=${state.user.idToken}`,{
           method: 'PATCH',
           body: JSON.stringify(tarea)
         })
@@ -194,9 +195,9 @@ export default createStore({
 
     },
   
-    async deleteTask({commit}, id){
+    async deleteTask({commit, state}, id){
       try {
-          await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${id}.json`,{
+          await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${state.user.localId}/${id}.json?auth=${state.user.idToken}`,{
           method: 'DELETE',
         })
         commit('DELETE_TASK', id)
