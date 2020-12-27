@@ -165,7 +165,7 @@ export default createStore({
         const res =  await fetch('https://notas-b4968-default-rtdb.firebaseio.com/tareas.json')
         const dataDB = await res.json()
 
-        console.log(" registros " +dataDB)
+        // console.log(" registros " +dataDB)
         const arrayTareas = []
 
         for(let id in dataDB){
@@ -227,7 +227,7 @@ export default createStore({
         }
 
         commit('SET_USER', userDB)
-        // router.push('/')
+        router.push('/api-rest')
       } catch (error) {
         console.log(error)
       }
@@ -235,7 +235,7 @@ export default createStore({
 
     async ingresoUsuario({commit}, usuario){
       try {
-        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_IMrPweGNwDaJAKejldvIu25HkNRe278', {
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBrXsme1BAgxY4JqMbGRu-wbgVK-vBHypY', {
           method: 'POST', 
           body: JSON.stringify({
             email: usuario.email,
@@ -243,6 +243,7 @@ export default createStore({
             returnSecureToken: true
           })
         })
+        // console.log(usuario)
 
         const userDB = await res.json()
         console.log('USER DB', userDB)
@@ -251,7 +252,7 @@ export default createStore({
           return console.log(userDB.error)
         }
         commit('SET_USER', userDB)
-        router.push('/')
+        router.push('/api-rest')
       } catch (error) {
         console.log(error)
       }

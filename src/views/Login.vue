@@ -1,8 +1,8 @@
 <template>
   <h1 class="my-5">Ingreso de usuarios</h1>
   <form @submit.prevent="procesarFormulario">
-    <input type="email" placeholder="Email" class="form-control my-2" id="" v-model.trim="email" >
-    <input type="password" placeholder="Password" id="" class="form-control my-2" v-model.trim="pass1" >
+    <input type="email" placeholder="Email" class="form-control my-2" v-model.trim="email" >
+    <input type="password" placeholder="Password" class="form-control my-2" v-model.trim="pass1" >
     <button type="submit" class="btn btn-primary" :disabled="bloquear">Ingresar</button>
   </form>
 </template>

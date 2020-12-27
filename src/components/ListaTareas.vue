@@ -25,8 +25,8 @@
 
       <!-- </td> -->
       <!-- esta es otra mas optima -->
-      <td>{{item.categorias.join(', ')}}</td>
-
+      <!-- <td>{{item.categorias.join(', ')}}</td> -->
+      <td v-html="item.categorias"></td>
       <td>{{item.estado}}</td>
       <td>{{item.numero}}</td>
       <td>
