@@ -257,11 +257,23 @@ export default createStore({
       } catch (error) {
         console.log(error)
       }
-    }
+    },
 
+    // para que al precionar el boton cerrar sesion el usuarioAutenticado pase a false
+    cerrarSesion({commit}){
+      commit('SET_USER', null)
+      router.push('/')
+    }
     // fin apartado
 
   },
+
+  getters: {
+    usuarioAutenticado(state) {
+      return !!state.user;
+    }
+  },
+
   modules: {
   }
 })
