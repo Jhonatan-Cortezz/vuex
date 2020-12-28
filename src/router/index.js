@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 const routes = [
   {
@@ -18,17 +19,20 @@ const routes = [
   {
     path: '/formulario',
     name: 'formulario',
-    component: () => import('../views/formulario.vue')
+    component: () => import('../views/formulario.vue'),
+    meta: { rutaProtegida: true }
   },
   {
     path: '/update/:id',
     name: 'Update',
-    component: () => import('../views/Update.vue')
+    component: () => import('../views/Update.vue'),
+    meta: { rutaProtegida: true }
   },
   {
     path: '/api-rest',
     name: 'ApiRest',
-    component: () => import('../views/ApiRest.vue')
+    component: () => import('../views/ApiRest.vue'),
+    meta: { rutaProtegida: true }
   },
   {
     path: '/registro',
@@ -45,6 +49,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // ...
+  console.log(to.meta.rutaProtegida)
+  if (to.meta.rutaProtegida) {
+    if (store.getters.usuarioAutenticado) {
+      next()
+    } else {
+      next('/')
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
