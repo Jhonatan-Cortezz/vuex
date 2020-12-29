@@ -22,7 +22,9 @@ export default createStore({
     },
 
     // usuario para API AUTH
-    user: null
+    user: null,
+
+    error: {tipo: null, mensaje: null}
 
   },
   mutations: {
@@ -86,6 +88,24 @@ export default createStore({
 
     SET_USER(state, payload){
       state.user = payload
+    },
+
+    SET_ERROR(state, payload){
+      if (payload === null) {
+        return state.error = {tipo: null, mensaje: null}
+      }
+      if (payload === "EMAIL_NOT_FOUND") {
+        return state.error = {tipo: 'email', mensaje: 'Usuario no registrado'}
+      }
+      if (payload === "INVALID_PASSWORD") {
+        return state.error = {tipo: 'password', mensaje: 'Contraseña incorrecta'}
+      }
+      if (payload === "EMAIL_EXISTS") {
+        return state.error = {tipo: 'email', mensaje: 'El usuario ya existe'}
+      }
+      if (payload === "INVALID_EMAIL") {
+        return state.error = {tipo: 'email', mensaje: 'Email no es valido, debe contener @ y .com'}
+      }
     }
 
     // fin mutaciones api rest
@@ -229,10 +249,11 @@ export default createStore({
 
         if (userDB.error) {
           console.log(userDB.error)
-          return
+          return commit('SET_ERROR', userDB.error.message)
         }
 
         commit('SET_USER', userDB)
+        commit('SET_ERROR', null)
         router.push('/api-rest')
 
         localStorage.setItem('usuario', JSON.stringify(userDB))
@@ -257,9 +278,11 @@ export default createStore({
         console.log('USER DB', userDB)
 
         if (userDB.error) {
-          return console.log(userDB.error)
+          console.log(userDB.error)
+          return commit('SET_ERROR', userDB.error.message)
         }
         commit('SET_USER', userDB)
+        commit('SET_ERROR', null)
         router.push('/api-rest')
         // guardar el usuario el localstorage para que al refrezcar no se pierda el token
         localStorage.setItem('usuario', JSON.stringify(userDB))
