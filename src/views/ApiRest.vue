@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="procesarFormulario">
+    <h2 class="my-4">CRUD FireBase</h2>
     <Input :tarea="tarea"/>
     <hr>
     <ListaTareas />

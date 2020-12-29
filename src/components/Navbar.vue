@@ -21,9 +21,9 @@
     </router-link>
 
     <div class="d-flex">
-      <router-link v-if="usuarioAutenticado" class="btn btn-dark" to="/">
+      <!-- <router-link v-if="usuarioAutenticado" class="btn btn-dark" to="/">
         Tareas
-      </router-link>
+      </router-link> -->
       <button v-if="usuarioAutenticado" @click="cerrarSesion" class="btn btn-dark">
         Cerrar Sesion
       </button>

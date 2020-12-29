@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="procesarFormulario">
+    <h2 class="my-4">CRUD en LocalStorage</h2>
     <Input :tarea="tarea"/>
     <hr>
     <ListaTareas />
@@ -37,7 +38,7 @@ export default {
   
   methods: {
     // Importacion de la actions para el CRUD
-    ...mapActions(['setTarea']),
+    ...mapActions(['setTarea', 'saveLocalStorage']),
 
     procesarFormulario() {
       console.log(this.tarea)
