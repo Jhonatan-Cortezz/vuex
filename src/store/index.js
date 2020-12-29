@@ -162,6 +162,11 @@ export default createStore({
     },
 
     async readDataBase({commit, state}){
+      if (localStorage.getItem('usuario')) {
+        commit('SET_USER', JSON.parse(localStorage.getItem('usuario')))
+      } else {
+        return commit('SET_USER', null)
+      }
       try {
         const res =  await fetch(`https://notas-b4968-default-rtdb.firebaseio.com/tareas/${state.user.localId}.json?auth=${state.user.idToken}`)
         const dataDB = await res.json()
@@ -229,6 +234,8 @@ export default createStore({
 
         commit('SET_USER', userDB)
         router.push('/api-rest')
+
+        localStorage.setItem('usuario', JSON.stringify(userDB))
       } catch (error) {
         console.log(error)
       }
@@ -254,6 +261,8 @@ export default createStore({
         }
         commit('SET_USER', userDB)
         router.push('/api-rest')
+        // guardar el usuario el localstorage para que al refrezcar no se pierda el token
+        localStorage.setItem('usuario', JSON.stringify(userDB))
       } catch (error) {
         console.log(error)
       }
@@ -263,6 +272,7 @@ export default createStore({
     cerrarSesion({commit}){
       commit('SET_USER', null)
       router.push('/')
+      localStorage.removeItem('usuario')
     }
     // fin apartado
 
